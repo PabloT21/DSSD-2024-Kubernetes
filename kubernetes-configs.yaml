@@ -1,4 +1,4 @@
-# deployment.yaml
+# Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -39,3 +39,39 @@ spec:
             port: 3000
           initialDelaySeconds: 5
           periodSeconds: 10
+
+---
+# HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sorteos-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sorteos-app
+  minReplicas: 2    # Mínimo de réplicas requerido
+  maxReplicas: 5    # Máximo de réplicas permitido
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60  # Escalar al alcanzar 60% de CPU utilizada
+
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: sorteos-service
+spec:
+  type: LoadBalancer    # Establezco el tipo LoadBalancer
+  ports:
+    - port: 80          # Puerto expuesto externamente
+      targetPort: 3000  # Puerto de la aplicación
+      protocol: TCP
+  selector:
+    app: sorteos-app
