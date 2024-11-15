@@ -1,0 +1,14 @@
+{
+  "name": "sorteo-app",
+  "version": "1.0.0",
+  "description": "Servicio de sorteo para puntos de recolección",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  }
+}
