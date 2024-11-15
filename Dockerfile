@@ -20,5 +20,5 @@ EXPOSE 3000
 
 #Inicio la aplicación
 
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start"]
 
