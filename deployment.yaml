@@ -1,0 +1,41 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sorteos-app
+  labels:
+    app: sorteos-app
+spec:
+  replicas: 2  # Mínimo 2 réplicas 
+  selector:
+    matchLabels:
+      app: sorteos-app
+  template:
+    metadata:
+      labels:
+        app: sorteos-app
+    spec:
+      containers: # Contenedor de la aplicación
+      - name: sorteos-container
+        image: pablot21/sorteos-dssd-grupo2:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: "200m"    # Asignación inicial de CPU
+            memory: "256Mi" # Asignación inicial de memoria
+          limits:
+            cpu: "500m"    # Límite máximo de CPU
+            memory: "512Mi" # Límite máximo de memoria
+        livenessProbe:     # Para verificar que el pod está vivo
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:    # Verificar que el pod está listo para recibir tráfico (mismo EP que el de liveness)
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
