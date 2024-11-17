@@ -22,7 +22,7 @@ kubectl cluster-info
 kubectl apply -f kubernetes-configs.yaml
 
 
-### 3. Verificar el despliegue
+### 4. Verificar el despliegue
 ```bash
 # Verificar que el deployment se creó correctamente
 kubectl get deployments
@@ -37,13 +37,13 @@ kubectl get hpa
 kubectl get services
 ```
 
-### 4. Obtener la URL del servicio
+### 5. Obtener la URL del servicio
 ```bash
-kubectl get service sorteos-service
+minikube ip
 ```
 La IP externa (EXTERNAL-IP) es la dirección para acceder al servicio.
 
-### 5. Monitoreo y Logs
+### 6. Monitoreo y Logs
 ```bash
 # Ver logs de los pods
 kubectl logs -l app=sorteos-app
@@ -59,12 +59,12 @@ kubectl get hpa sorteos-app-hpa --watch
 
 1. **Probar el endpoint de salud:**
 ```bash
-curl http://<EXTERNAL-IP>/health
+curl http://<EXTERNAL-IP>:31220/health
 ```
 
 2. **Probar el servicio de sorteos:**
 ```bash
-curl -X POST http://<EXTERNAL-IP>/api/sorteos \
+curl -X POST http://<EXTERNAL-IP>/api/lottery/token:31220 \
   -H "Content-Type: application/json" \
   -d '{"collectionPointId": "PUNTO001"}'
 ```
