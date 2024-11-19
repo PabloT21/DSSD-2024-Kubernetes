@@ -22,7 +22,12 @@ kubectl cluster-info
 kubectl apply -f kubernetes-configs.yaml
 
 
-### 4. Verificar el despliegue
+### 4. Activar Metrics API (Para trackear el 60% de utilización de CPU)
+```bash
+minikube addons enable metrics-server
+```
+
+### 5. Verificar el despliegue
 ```bash
 # Verificar que el deployment se creó correctamente
 kubectl get deployments
@@ -37,13 +42,13 @@ kubectl get hpa
 kubectl get services
 ```
 
-### 5. Obtener la URL del servicio
+### 6. Obtener la URL del servicio
 ```bash
 minikube ip
 ```
 La IP externa (EXTERNAL-IP) es la dirección para acceder al servicio.
 
-### 6. Monitoreo y Logs
+### 7. Monitoreo y Logs
 ```bash
 # Ver logs de los pods
 kubectl logs -l app=sorteos-app

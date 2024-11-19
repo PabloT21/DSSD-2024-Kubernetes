@@ -22,11 +22,11 @@ spec:
         - containerPort: 3000
         resources:
           requests:
-            cpu: "200m"    # Asignación inicial de CPU
-            memory: "256Mi" # Asignación inicial de memoria
+            cpu: "29m"    # Asignación inicial de CPU
+            memory: "80Mi" # Asignación inicial de memoria
           limits:
-            cpu: "500m"    # Límite máximo de CPU
-            memory: "512Mi" # Límite máximo de memoria
+            cpu: "30m"    # Límite máximo de CPU
+            memory: "90Mi" # Límite máximo de memoria
         livenessProbe:     # Para verificar que el pod está vivo
           httpGet:
             path: /health
@@ -59,7 +59,7 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 60  # Escalar al alcanzar 60% de CPU utilizada
+        averageUtilization: 60 # Escalar al alcanzar 60% de CPU utilizada
 
 ---
 # Service
