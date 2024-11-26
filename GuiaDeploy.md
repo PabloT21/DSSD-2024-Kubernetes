@@ -69,7 +69,7 @@ curl http://<EXTERNAL-IP>:31220/health
 
 2. **Probar el servicio de sorteos:**
 ```bash
-curl -X POST http://<EXTERNAL-IP>/api/lottery/token:31220 \
+curl -X POST http://<EXTERNAL-IP>:31220/api/lottery/token \
   -H "Content-Type: application/json" \
   -d '{"collectionPointId": "PUNTO001"}'
 ```
